@@ -1,5 +1,20 @@
 .header img{
     width: 20%;
-    display: block;
-    margin: 0px auto;
+}
+.header{
+    text-align: center;
+}
+.header nav{
+    line-height: 37px;
+    background-color: black;
+    font-size: 20px;
+}
+.header nav a{
+    text-decoration: none;
+    margin-right: 10px;
+    color: #ffff;
+    padding: 5px;
+}
+.header nav a:hover{
+    background-color: grey;
 }
