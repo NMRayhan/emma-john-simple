@@ -3,11 +3,23 @@
 }
 .product-container{
     width: 70%;
-    margin-left: 150px;
+    margin-left: 120px;
     margin-right: 5px;
     border-right: 1px solid lightgray;
 }
 .product-details h4{ 
     border-bottom: 1px solid lightgray;
-    
+}
+.search-bar{
+    background-color: rgb(68, 67, 67);
+    height: 80px;
+}
+.search-bar input[type="text"]{
+    width: 60%;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+.cart-container{
+    width: 20%;
+    margin: 0 auto;
 }
