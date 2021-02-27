@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from 'react';
 import fakeData from '../../fakeData';
 import Cart from '../Cart/Cart';
@@ -6,7 +8,6 @@ import "./Shop.css";
 
 const Shop = () => {
     const first10 = fakeData.slice(0, 15)
-    // console.log(first10);
     const [products, setProducts] = useState(first10)
     const [cart, setCart] = useState([])
     const handleAddClick = (product) => {
@@ -16,9 +17,15 @@ const Shop = () => {
     }
     return (
         <div>
-            <div className="search-bar ">
-                <input type="text" name="" id="" placeholder="Type Here to Search" className="form-control"/>
+            <div className="search-container row">
+                <div className="col-11">
+                    <input type="text" name="" id="" placeholder="Type Here to Search" className="form-control" />
+                </div>
+                <div className="col-1">
+                    <a href="#"><span><FontAwesomeIcon className="cart-counter" icon={faShoppingCart} />{cart.length}</span></a>
+                </div>
             </div>
+
             <div className="shop-container">
                 <div className="product-container">
                     {
