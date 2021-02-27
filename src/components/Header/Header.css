@@ -6,12 +6,12 @@
 }
 .header nav{
     line-height: 37px;
-    background-color: black;
+    
     font-size: 20px;
 }
 .header nav a{
     text-decoration: none;
-    margin-right: 10px;
+    margin-left: 10px;
     color: #ffff;
     padding: 5px;
 }
