@@ -6,8 +6,12 @@ import { Link } from 'react-router-dom';
 
 const Product = (props) => {
     const { img, name, url, seller, price, stock, key } = props.product
+    console.log(props.showAddToCart);
     return (
-        <div className="row" style={{ borderBottom: "1px solid lightgray", marginRight: "2px" }}>
+        <div className="row" style={{
+            borderBottom: "1px solid lightgray",
+            marginRight: "2px"
+        }}>
             <div className="col-md-3 product-img">
                 <img src={img} alt="" />
             </div>
@@ -18,13 +22,14 @@ const Product = (props) => {
                     </Link>
                 </h4>
                 <div className="col-md-6">
-                    <p>by: {seller}</p>
+                    <p>By: {seller}</p>
                     <h4>${price}</h4>
-                    <p>only {stock} left in stock - order soon</p>
-                    <button
-                        className="btn btn-warning"
-                        onClick={() => props.handleAddClick(props.product)}
-                    ><FontAwesomeIcon icon={faShoppingCart} />Add to Cart</button>
+                    <p>Only <strong>{stock}</strong> left in stock - order soon</p>
+                    {props.showAddToCart &&
+                        <button
+                            className="btn btn-warning"
+                            onClick={() => props.handleAddClick(props.product)}
+                        ><FontAwesomeIcon icon={faShoppingCart} />Add to Cart</button>}
                 </div>
                 <div className="col-md-6">
                     <h4>Features</h4>

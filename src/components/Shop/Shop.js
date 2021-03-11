@@ -32,6 +32,7 @@ const Shop = () => {
                                 <div>
                                     {
                                         <Product
+                                            showAddToCart={true}
                                             product={product}
                                             handleAddClick={handleAddClick}
                                             key={product.key}
