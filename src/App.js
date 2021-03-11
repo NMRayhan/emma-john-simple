@@ -1,15 +1,48 @@
+import {
+  BrowserRouter as Router,
+
+  Route, Switch
+} from "react-router-dom";
 import './App.css';
 import Header from './components/Header/Header';
-import Product from './components/Product/Product';
+import InventoryManager from './components/InventoryManager/InventoryManager';
+import NotFound from './components/notFound/NotFound';
+import ProductDetails from './components/ProductDetails/ProductDetails';
+import Profile from './components/Profile/Profile';
+import Review from './components/Review/Review';
 import Shop from './components/Shop/Shop';
 
 
 function App() {
   return (
-    <div>
+    <>
       <Header></Header>
-      <Shop></Shop>
-    </div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Shop />
+          </Route>
+          <Route path="/shop">
+            <Shop />
+          </Route>
+          <Route path="/order-review">
+            <Review />
+          </Route>
+          <Route path="/inventory-manage">
+            <InventoryManager />
+          </Route>
+          <Route path="/Profile">
+            <Profile />
+          </Route>
+          <Route path="/product/:productKey">
+            <ProductDetails />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
