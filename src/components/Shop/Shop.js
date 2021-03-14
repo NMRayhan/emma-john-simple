@@ -1,7 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import React, { useState } from 'react';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react';
 import fakeData from '../../fakeData';
+import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import "./Shop.css";
@@ -10,8 +11,37 @@ const Shop = () => {
     const first10 = fakeData.slice(0, 15)
     const [products, setProducts] = useState(first10)
     const [cart, setCart] = useState([])
+
+    useEffect(() => {
+        const savedCart = getDatabaseCart()
+        const productKeys = Object.keys(savedCart)
+
+        const PreviousCart = productKeys.map(existingkey => {
+            const Product = fakeData.find(product => product.key === existingkey)
+            Product.quantity = savedCart[existingkey]
+            return Product;
+        })
+        setCart(PreviousCart)
+    }, [])
+
+
     const handleAddClick = (product) => {
-        setCart([...cart, product])
+        const toBeAddeKey = product.key;
+        const sameProduct = cart.find(pd => pd.key === toBeAddeKey)
+        let count = 1;
+        let newCart;
+        if (sameProduct) {
+            count = sameProduct.quantity + 1;
+            sameProduct.quantity = count;
+            const others = cart.filter(pd => pd.key !== toBeAddeKey)
+            newCart = [...others, sameProduct]
+        }
+        else {
+            product.quantity = 1;
+            newCart = [...cart, product];
+        }
+        setCart(newCart)
+        addToDatabaseCart(product.key, count)
     }
     return (
         <div>
@@ -27,15 +57,15 @@ const Shop = () => {
             <div className="shop-container">
                 <div className="product-container">
                     {
-                        products.map(product => {
+                        products.map(pd => {
                             return (
                                 <div>
                                     {
                                         <Product
+                                            key={pd.key}
                                             showAddToCart={true}
-                                            product={product}
+                                            product={pd}
                                             handleAddClick={handleAddClick}
-                                            key={product.key}
                                         ></Product>
                                     }
                                 </div>
@@ -47,7 +77,7 @@ const Shop = () => {
                     <Cart TotalQuantity={cart}></Cart>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

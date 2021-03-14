@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Cart.css'
 
 const Cart = (props) => {
     const cart = props.TotalQuantity
-
+    console.log(cart);
     let price = 0;//price Calculation
     for (let i = 0; i < cart.length; i++) {
         const item = cart[i]
-        price = price + item.price
+        price = price + item.price * parseFloat(item.quantity);
     }
     const totalPrice = price.toFixed(2);
 
@@ -60,7 +61,7 @@ const Cart = (props) => {
                         </tr>
                     </tfoot>
                 </table>
-                <button className="btn btn-warning review-btn">Review Your Order</button>
+                <Link to={"/order-review"}><button className="btn btn-warning review-btn" >Review Your Order</button></Link>
             </div>
 
         </div>
