@@ -61,7 +61,9 @@ const Cart = (props) => {
                         </tr>
                     </tfoot>
                 </table>
-                <Link to={"/order-review"}><button className="btn btn-warning review-btn" >Review Your Order</button></Link>
+                {
+                    props.children
+                }
             </div>
 
         </div>
